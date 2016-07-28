@@ -1,6 +1,6 @@
 # slmath ver. 2.6.0
 
-Mathematics library with GLSL shading language style classes. 
+Mathematics C++ library with GLSL shading language style classes. 
 The library supports various linear algebra classes like 
 vec2, vec3, mat4, etc. OpenGL Shading Language specification 
 is used as reference for the functionality.
