@@ -66,8 +66,7 @@ that as reference in Visual Studio project settings $(SLMATH)\include.
 
 Then you just add the slmath project file to your Solution, e.g. from "c:\slmath\build\vs2008\slmath\slmath.vcproj"
 
-After that you can use the library, for example, by including in your code 
-#include <slm/vec2.h>
+After that you can use the library, for example, by including in your code include <slm/vec2.h>
 
 
 ## Using SIMD on 32-bit builds (x86)
@@ -101,13 +100,15 @@ void __cdecl operator delete[]( void* p )
 Vector operations have a lot of assert checks. 
 Those slow down _DEBUG build but are usually very useful to catch programming errors.
 However, if you want to disable those you can comment out line from slmath_configure:
-//#define SLMATH_VEC_ASSERTS
+
+        //#define SLMATH_VEC_ASSERTS
 
 You can also selectively uncomment per compilation unit using following trick:
-#include <slm/slmath_configure.h>
-#undef SLMATH_VEC_ASSERTS
-#include <slm/vec4.h>
-// ...
+
+        #include <slm/slmath_configure.h>
+        #undef SLMATH_VEC_ASSERTS
+        #include <slm/vec4.h>
+        // ...
 
 
 ## About some design decisions (free functions vs member functions)
