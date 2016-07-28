@@ -133,6 +133,11 @@ increases them, the error-reducing form is used.
 
 ## Changes
 
+v2.6.0 (2016-07-29):
+* Cleaned up svn files
+* Removed build files
+* Moved sources to Github
+
 v2.5.0 (2013-09-02):
 * Visual Studio 2012 project files included
 * Mersenne twister / gcc compiling warning fixes (thanks to Loren Hoffman!)
