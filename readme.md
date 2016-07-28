@@ -26,33 +26,18 @@ to see how the library should behave. :)
 
 Only basic C/C++ is required, so should be relatively easy to compile this on any platform.
 
-Primary development platform:
-
-* Windows 7 64bit / Visual Studio 2012
-
-Platforms which have project files included:
+Known to work on:
 
 * VS2012
-
 * VS2010
-
 * VS2008
-
 * VS2003 (thanks to Peter Ingebretson <peter at ingebretson.net>)
-
-Known-to-be-used platforms but no project files included:
-
-* iPhone (could someone provide me project files? I'm a Droid guy ;))
-
+* iOS
 * Android (NDK)
-
 * Maemo/MeeGo (Nokia N900)
-
 * Symbian/S60
-
 * Samsung Bada
-
-* N-Gage (dead platform now so makefiles not needed, thanks...)
+* N-Gage
 
 So it should be easy to port to almost any platform. It can be compiled even
 on a platform which doesn't support namespaces (e.g. BREW).
