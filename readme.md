@@ -1,4 +1,4 @@
-# slmath ver. 2.5.0
+# slmath ver. 2.6.0
 
 Mathematics library with GLSL shading language style classes. 
 The library supports various linear algebra classes like 
