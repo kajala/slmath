@@ -82,7 +82,7 @@ static bool test_mat4( char* testid )
 {
 	// set device transformations
 	mat4 proj = perspective_fov_rh( radians(60.f), 640.f/480.f, 0.01f, 10000.f );
-	mat4 view = lookAtRH( vec3(0,0,200), vec3(0,0,0), vec3(0,1,0) );
+	mat4 view = look_at_rh( vec3(0,0,200), vec3(0,0,0), vec3(0,1,0) );
 	mat4 world(1);
 
 	// test: transform a point with world-view-projection transform
@@ -116,7 +116,7 @@ static bool test_mat4( char* testid )
 	mat4 r1( radians(80.f), vec3(1,0,0) );
 	mat4 r1b = rotation_x( radians(80.f) );
 	mat4 r2( radians(80.f), vec3(0,1,0) );
-	mat4 r2b = rotationY( radians(80.f) );
+	mat4 r2b = rotation_y( radians(80.f) );
 	mat4 r3( radians(80.f), vec3(0,0,1) );
 	mat4 r3b = rotation_z( radians(80.f) );
 	TEST( err(r1,r1b) < 1e-3f );
@@ -157,14 +157,14 @@ bool test_rotations( char* testid )
 {
 	float a = radians(45.f);
 	vec4 v = vec4(10,10,0,0);
-	vec3 r1 = rotateZ( v.xyz(), a );
+	vec3 r1 = rotate_z( v.xyz(), a );
 	vec3 r2 = (rotation_z(a) * v).xyz();
 	TEST( length(r1-r2) < 1e-5f );
-	r1 = rotateX( v.xyz(), a );
+	r1 = rotate_x( v.xyz(), a );
 	r2 = (rotation_x(a) * v).xyz();
 	TEST( length(r1-r2) < 1e-5f );
-	r1 = rotateY( v.xyz(), a );
-	r2 = (rotationY(a) * v).xyz();
+	r1 = rotate_y( v.xyz(), a );
+	r2 = (rotation_y(a) * v).xyz();
 	TEST( length(r1-r2) < 1e-5f );
 	return true;
 }

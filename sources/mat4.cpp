@@ -402,7 +402,7 @@ mat4 rotation_x( float a )
 	return m;
 }
 
-mat4 rotationY( float a )
+mat4 rotation_y( float a )
 {
 	float s, c;
 	sincos( a, &s, &c );
@@ -432,7 +432,7 @@ mat4 rotation_z( float a )
 	return m;
 }
 
-mat4 targetAtRH( const vec3& eye, const vec3& at, const vec3& up )
+mat4 target_at_rh( const vec3& eye, const vec3& at, const vec3& up )
 {
 	SLMATH_VEC_ASSERT( distance(eye,at) > FLT_MIN );
 	SLMATH_VEC_ASSERT( length(up) > FLT_MIN );
@@ -449,7 +449,7 @@ mat4 targetAtRH( const vec3& eye, const vec3& at, const vec3& up )
 	return m;
 }
 
-mat4 lookAtRH( const vec3& eye, const vec3& at, const vec3& up )
+mat4 look_at_rh( const vec3& eye, const vec3& at, const vec3& up )
 {
 	vec3 zaxis = normalize(eye - at);
 	vec3 xaxis = normalize(cross(up, zaxis));
@@ -463,7 +463,7 @@ mat4 lookAtRH( const vec3& eye, const vec3& at, const vec3& up )
 	return m;
 }
 
-mat4 cubeMapViewRH( size_t face, const vec3& worldpos )
+mat4 cube_map_view_rh( size_t face, const vec3& worldpos )
 {
 	SLMATH_VEC_ASSERT( face < 6 );
 	SLMATH_VEC_ASSERT( check(worldpos) );
@@ -516,7 +516,7 @@ mat4 cubeMapViewRH( size_t face, const vec3& worldpos )
 	return inverse(tm);
 }
 
-mat4 cubeMapProjectionRH( float znear, float zfar )
+mat4 cube_map_projectino_rh( float znear, float zfar )
 {
 	SLMATH_VEC_ASSERT( znear > 1e-5f && znear < 1e6f );
 	SLMATH_VEC_ASSERT( zfar > 1e-5f && zfar < 1e6f );
@@ -612,7 +612,7 @@ mat4 fromToRotation( const vec3& from, const vec3& to )
 	return mtx;
 }
 
-mat4 frameFromNormal( const vec3& z )
+mat4 frame_from_normal( const vec3& z )
 {
 	SLMATH_VEC_ASSERT( fabsf(length(z)-1.f) < 1e-6f );
 
@@ -664,7 +664,7 @@ mat4 ortho_lh( float w, float h, float znear, float zfar )
 	return ortho( w, h, znear, zfar, -1.f );
 }
 
-mat4 outerProduct( const vec4& a, const vec4& b )
+mat4 outer_product( const vec4& a, const vec4& b )
 {
 	mat4 o;
 	m128_t* const o128 = o.m128();

@@ -305,19 +305,19 @@ vec3	mul( float b, const vec3& a );
  * Rotates vector v about Z-axis by specified angle a (in radians).
  * @ingroup vec_util
  */
-vec3	rotateZ( const vec3& v, float a );
+vec3	rotate_z( const vec3& v, float a );
 
 /**
  * Rotates vector v about Y-axis by specified angle a (in radians).
  * @ingroup vec_util
  */
-vec3	rotateY( const vec3& v, float a );
+vec3	rotate_y( const vec3& v, float a );
 
 /**
  * Rotates vector v about X-axis by specified angle a (in radians).
  * @ingroup vec_util
  */
-vec3	rotateX( const vec3& v, float a );
+vec3	rotate_x( const vec3& v, float a );
 
 #include <slm/vec3.inl>
 

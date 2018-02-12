@@ -143,7 +143,7 @@ v2.3.0 (2011-11-23):
 * Added in-place vec2, vec3, vec4 and quat normalize() (as method to avoid confusion to free function)
 * Fixed 1D Gaussian blur kernel
 * Added VS2010 test project and rotation tests (only in svn version, not release)
-* Added vec3::rotateX, vec3::rotateY, vec3::rotateZ and vec2::rotate
+* Added vec3::rotate_x, vec3::rotate_y, vec3::rotate_z and vec2::rotate
 
 v2.2.1 (2011-10-30):
 * fixed bug in float_util.inl clamp (thanks to Brad Johnston!)
@@ -203,7 +203,7 @@ v1.8.0 (2010-10-21):
 * Moved from SourceForge to Google Code
 
 v1.7.9 (2010-09-12):
-* frameFromNormal: vec3(1,1,1) caused the function to fail (thanks Loren Hoffman for finding the bug!)
+* frame_from_normal: vec3(1,1,1) caused the function to fail (thanks Loren Hoffman for finding the bug!)
 * intersectLineTri: intersection was incorrectly returned when s>1 (thanks Fernando Resco for finding the bug!)
 * more vec scripting compatibility functions (add,mul,neg)
 
@@ -238,7 +238,7 @@ v1.7.4 (2009-05-08):
 
 v1.7.3 (2009-05-08):
 * Added x64 builds
-* Added mat4 outerProduct(vec4,vec4)
+* Added mat4 outer_product(vec4,vec4)
 
 v1.7.2 (2009-05-07):
 * Unified build naming conventions to avoid file conflicts
@@ -274,7 +274,7 @@ v1.4 (2009-01-16):
 * x64 Release build
 * added random_util: randomFloat, randomFloatSigned, randomPointOnSphere, randomPointInSphere
 * random_util: added randomSamplePointsOnHemisphere, randomSamplePointsInHemisphere
-* mat4_util: added fromToRotation, frameFromNormal
+* mat4_util: added fromToRotation, frame_from_normal
 * vec4_util: merged
 
 v1.3 (2009-01-08):
@@ -287,11 +287,11 @@ v1.2 (2008-12-04):
 * vec2,3,4: added saturate, clamp
 * mat4: added row vector matrix multiply, cleaned up documentation.
 * mat4_util: added translation(vec3)
-* mat4_util: added cubeMapViewRH and cubeMapProjectionRH
+* mat4_util: added cube_map_view_rh and cube_map_projectino_rh
 
 v1.1 (2008-11-21):
 * vec2,3,4: added constructors using lower dimension vectors
-* mat4_util: added perspectiveRH, rotation_x, rotationY, rotation, targetAtRH, lookAtRH
+* mat4_util: added perspectiveRH, rotation_x, rotation_y, rotation, target_at_rh, look_at_rh
 * vec2,3,4: added GLSL style component wise multply and division operators
 * tests: added test_mat4
 

@@ -257,7 +257,7 @@ mat4	rotation_x( float a );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	rotationY( float a );
+mat4	rotation_y( float a );
 
 /**
  * Returns rotation about Z-axis.
@@ -290,7 +290,7 @@ mat4	scaling( const vec3& v );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	targetAtRH( const vec3& eye, const vec3& at, const vec3& up );
+mat4	target_at_rh( const vec3& eye, const vec3& at, const vec3& up );
 
 /**
  * Builds a right-handed look-at (world-to-view) transformation matrix
@@ -301,27 +301,27 @@ mat4	targetAtRH( const vec3& eye, const vec3& at, const vec3& up );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	lookAtRH( const vec3& eye, const vec3& at, const vec3& up );
+mat4	look_at_rh( const vec3& eye, const vec3& at, const vec3& up );
 
 /**
  * Creates right-handed world-to-cubemap-view transform for specified cube map face.
  * @param face Cube map face index. 0=X+, 1=X-, 2=Y+, 3=Y-, 4=Z+, 5=Z-. Defines view rotation.
  * @param worldpos Cube map center position in world space.
  * @return The world-to-cubemap-view transform.
- * @see cubeMapProjectionRH
+ * @see cube_map_projectino_rh
  * @ingroup mat_util
  */
-mat4	cubeMapViewRH( size_t face, const vec3& worldpos );
+mat4	cube_map_view_rh( size_t face, const vec3& worldpos );
 
 /**
  * Creates right-handed cubemap view-to-projection transform.
  * @param znear Near clip plane distance. Must be in range [1e-5f,1e6].
  * @param zfar Far clip plane distance. Must be in range (znear,1e6].
  * @return The view-to-projection transform.
- * @see cubeMapViewRH
+ * @see cube_map_view_rh
  * @ingroup mat_util
  */
-mat4	cubeMapProjectionRH( float znear, float zfar );
+mat4	cube_map_projectino_rh( float znear, float zfar );
 
 /**
  * Returns rotation matrix that rotates a vector to another vector.
@@ -342,7 +342,7 @@ mat4	fromToRotation( const vec3& from, const vec3& to );
  * @return Transformation frame which has input normal as axis[2].
  * @ingroup mat_util
  */
-mat4	frameFromNormal( const vec3& normal );
+mat4	frame_from_normal( const vec3& normal );
 
 /**
  * Returns outer product (tensor product) of two vectors.
@@ -351,7 +351,7 @@ mat4	frameFromNormal( const vec3& normal );
  * @return Matrix resulting from outer product of vectors a and b.
  * @ingroup vec_util
  */
-mat4	outerProduct( const vec4& a, const vec4& b );
+mat4	outer_product( const vec4& a, const vec4& b );
 
 #include <slm/mat4.inl>
 
