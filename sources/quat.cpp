@@ -84,7 +84,7 @@ quat quat::operator*( const quat& o ) const
 	return q;
 }
 
-float normSquared( const quat& q )
+float norm_squared( const quat& q )
 {
 	return dot(q.xyzw(),q.xyzw());
 }
@@ -187,7 +187,7 @@ quat slerp( const quat& a, const quat& b, float u )
 	}
 }
 
-void toAngleAxis( const quat& q, float* angle, vec3* axis )
+void to_angle_axis( const quat& q, float* angle, vec3* axis )
 {
 	ASSERT_IS_UNIT( q ); // normalize(q) before use this function
 
@@ -211,4 +211,4 @@ void toAngleAxis( const quat& q, float* angle, vec3* axis )
 
 SLMATH_END()
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

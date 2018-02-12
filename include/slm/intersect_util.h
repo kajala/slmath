@@ -12,11 +12,11 @@ SLMATH_BEGIN()
 /*@{*/
 
 /*
- * Line segment parameters for the second (low-level) intersectLineBox function.
+ * Line segment parameters for the second (low-level) intersect_line_box function.
  * Use of this class is not needed but is provided as alternative if more extensive optimization is needed.
- * @see intersectLineBox
+ * @see intersect_line_box
  */
-class intersectLineBox_Line
+class intersect_line_box_line
 {
 public:
 	/** Line segment start point. */
@@ -33,12 +33,12 @@ public:
 	const int			signz;
 
 	/** Sets ray origin and direction. Calculates intermediate values. */
-	intersectLineBox_Line( const vec3& origin, const vec3& direction );
+	intersect_line_box_line( const vec3& origin, const vec3& direction );
 
 private:
-	intersectLineBox_Line();
-	intersectLineBox_Line( const intersectLineBox_Line& );
-	intersectLineBox_Line& operator=( const intersectLineBox_Line& );
+	intersect_line_box_line();
+	intersect_line_box_line( const intersect_line_box_line& );
+	intersect_line_box_line& operator=( const intersect_line_box_line& );
 };
 
 /**
@@ -55,7 +55,7 @@ private:
  * @param t [out] Relative distance (0,1) to intersection.
  * @return true if intersect.
  */
-bool	intersectLineTri( const vec3& o, const vec3& d, const vec3& v0, const vec3& v1, const vec3& v2, float* t );
+bool	intersect_line_triangle( const vec3& o, const vec3& d, const vec3& v0, const vec3& v1, const vec3& v2, float* t );
 
 /**
  * Finds if line segment and box intersect.
@@ -70,12 +70,12 @@ bool	intersectLineTri( const vec3& o, const vec3& d, const vec3& v0, const vec3&
  * @param boxmax Maximum coordinates of the box.
  * @return true if intersect.
  */
-bool	intersectLineBox( const vec3& o, const vec3& d, const vec3& boxmin, const vec3& boxmax );
+bool	intersect_line_box( const vec3& o, const vec3& d, const vec3& boxmin, const vec3& boxmax );
 
 /*
  * Finds if line segment and box intersect.
  * Uses pre-calculated information in intersectRayBox_Ray so a bit faster
- * than direct call version of intersectLineBox.
+ * than direct call version of intersect_line_box.
  *
  * See: Amy Williams, Steve Barrus, R. Keith Morley, and Peter Shirley
  * "An Efficient and Robust Ray-Box Intersection Algorithm"
@@ -85,7 +85,7 @@ bool	intersectLineBox( const vec3& o, const vec3& d, const vec3& boxmin, const v
  * @param boxminmax Minimum and maximum coordinates (so array [2] of vec3) of the box.
  * @return true if intersect.
  */
-//bool	intersectLineBox( const intersectLineBox_Line* line, const vec3* boxminmax );
+//bool	intersect_line_box( const intersect_line_box_line* line, const vec3* boxminmax );
 
 /*@}*/
 
@@ -93,4 +93,4 @@ SLMATH_END()
 
 #endif 
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

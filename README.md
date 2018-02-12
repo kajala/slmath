@@ -28,6 +28,7 @@ Only basic C/C++ is required, so should be relatively easy to compile this on an
 
 Known to work on:
 
+* Ubuntu/Linux g++
 * VS2012
 * VS2010
 * VS2008
@@ -46,12 +47,6 @@ on a platform which doesn't support namespaces (e.g. BREW).
 ## Install/usage 
 
 There is no external dependencies so as long as the headers are found and cpps compiled, everything should be fine.
-Personally, I prefer using SLMATH environment variable pointing to the SLMATH directory, so I can just use 
-that as reference in Visual Studio project settings $(SLMATH)\include.
-
-Then you just add the slmath project file to your Solution, e.g. from "c:\slmath\build\vs2008\slmath\slmath.vcproj"
-
-After that you can use the library, for example, by including in your code include <slm/vec2.h>
 
 
 ## Using SIMD on 32-bit builds (x86)
@@ -117,6 +112,8 @@ increases them, the error-reducing form is used.
 
 
 ## Changes
+
+* Cleanup
 
 v2.6.0 (2016-07-29):
 * Cleaned up svn files
@@ -193,7 +190,7 @@ v1.8.2 (2011-03-02):
 * optimizations and internal refactoring
 
 v1.8.1 (2011-02-10):
-* perspectiveFovLH fixed, [2][2] was + instead of - (thanks to Brad Johnston for finding the bug)
+* perspective_fov_lh fixed, [2][2] was + instead of - (thanks to Brad Johnston for finding the bug)
 * added Visual Studio 2010 project files
 * SIMD transpose(mat4)
 * SWIG-related code removed
@@ -268,7 +265,7 @@ v1.5 (2009-02-25):
 * added intersect_util: intersectRayBox, intersectRayTriangle
 * added vec3: facenormal_cw and facenormal_ccw
 * added abs, min, max ('v' as vector, to avoid possible name clashes with platform C-macros)
-* added mat4_util: orthoRH, orthoLH
+* added mat4_util: ortho_rh, ortho_lh
 * merged mat4_util.h -> mat4.h since the division between the two was not very intuitive
 * removed assert(check(*this)) from [] op of vectors since init-assign is valid op
 * size_t usage for better 64-bit compatibility
@@ -294,7 +291,7 @@ v1.2 (2008-12-04):
 
 v1.1 (2008-11-21):
 * vec2,3,4: added constructors using lower dimension vectors
-* mat4_util: added perspectiveRH, rotationX, rotationY, rotationZ, targetAtRH, lookAtRH
+* mat4_util: added perspectiveRH, rotation_x, rotationY, rotation, targetAtRH, lookAtRH
 * vec2,3,4: added GLSL style component wise multply and division operators
 * tests: added test_mat4
 

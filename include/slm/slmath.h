@@ -22,7 +22,6 @@
 #include <slm/mtrnd.h>
 #include <slm/no_simd.h>
 #include <slm/quat.h>
-#include <slm/random.h>
 #include <slm/runtime_checks.h>
 #include <slm/simd.h>
 #include <slm/vec_impl.h>
@@ -33,4 +32,4 @@
 
 #endif
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

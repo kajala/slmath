@@ -2,7 +2,7 @@
 
 SLMATH_BEGIN()
 
-intersectLineBox_Line::intersectLineBox_Line( const vec3& origin, const vec3& direction ) :
+intersect_line_box_line::intersect_line_box_line( const vec3& origin, const vec3& direction ) :
 	o( origin ),
 	d( direction ),
 	inv_d( fabsf(direction.x) > FLT_MIN ? 1.f/direction.x : FLT_MAX, 
@@ -14,7 +14,7 @@ intersectLineBox_Line::intersectLineBox_Line( const vec3& origin, const vec3& di
 {
 }
 
-bool intersectLineTri( const vec3& o, const vec3& d, const vec3& v0, const vec3& v1, const vec3& v2, float* t )
+bool intersect_line_triangle( const vec3& o, const vec3& d, const vec3& v0, const vec3& v1, const vec3& v2, float* t )
 {
 	const vec3	e1		= v1 - v0;
 	const vec3	e2		= v2 - v0;
@@ -44,7 +44,7 @@ bool intersectLineTri( const vec3& o, const vec3& d, const vec3& v0, const vec3&
 	return true;
 }
 
-bool intersectLineBox( const intersectLineBox_Line& r, const vec3* boxminmax )
+bool intersect_line_box( const intersect_line_box_line& r, const vec3* boxminmax )
 {
 	const float t0 = 0.0f;
 	const float t1 = 1.0f;
@@ -72,15 +72,15 @@ bool intersectLineBox( const intersectLineBox_Line& r, const vec3* boxminmax )
 	return ( (tmin < t1) && (tmax > t0) );
 }
 
-bool intersectLineBox( const vec3& o, const vec3& d, const vec3& boxmin, const vec3& boxmax )
+bool intersect_line_box( const vec3& o, const vec3& d, const vec3& boxmin, const vec3& boxmax )
 {
 	// these could be pre-init per line
-	intersectLineBox_Line line( o, d );
+	intersect_line_box_line line( o, d );
 	// these could be pre-init per box
 	const vec3 boxminmax[2] = {boxmin, boxmax};
-	return intersectLineBox( line, boxminmax );
+	return intersect_line_box( line, boxminmax );
 }
 
 SLMATH_END()
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

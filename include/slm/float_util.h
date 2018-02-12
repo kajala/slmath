@@ -106,22 +106,6 @@ float	radians( float deg );
  */
 float	degrees( float rad );
 
-/**
- * Calculates 1D Gaussian blur filter kernel with specified size.
- * @param s Width of the kernel. Radius of the kernel is (s-1)/2. s must be at least 1.
- * @param o Standard deviation. Pass in 0.f to use default formula: ((s-1)*0.5 - 1)*0.3 + 0.8.
- * @param kernel [out] Array of size [s] receiving filter weights
- */
-void	getGaussianBlurKernel1D( int s, float o, float* kernel );
-
-/**
- * Calculates 2D Gaussian blur filter kernel with specified size.
- * @param s Width of the kernel. Radius of the kernel is (s-1)/2. s must be at least 1.
- * @param o Standard deviation. Pass in 0.f to use default formula: ((s-1)*0.5 - 1)*0.3 + 0.8.
- * @param kernel [out] Array of size [s*s] receiving filter weights
- */
-void	getGaussianBlurKernel2D( int s, float o, float* kernel );
-
 /** 
  * Converts angle from degrees to radians.
  * @param deg Angle in degrees.
@@ -213,4 +197,4 @@ SLMATH_END()
 
 #endif
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

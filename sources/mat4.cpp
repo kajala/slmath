@@ -377,17 +377,17 @@ static mat4 perspectiveFov( float fovy, float aspect, float znear, float zfar, f
 	return m;
 }
 
-mat4 perspectiveFovLH( float fovy, float aspect, float znear, float zfar )
+mat4 perspective_fov_lh( float fovy, float aspect, float znear, float zfar )
 {
 	return perspectiveFov(fovy,aspect,znear,zfar,-1.f);
 }
 
-mat4 perspectiveFovRH( float fovy, float aspect, float znear, float zfar )
+mat4 perspective_fov_rh( float fovy, float aspect, float znear, float zfar )
 {
 	return perspectiveFov(fovy,aspect,znear,zfar,1.f);
 }
 
-mat4 rotationX( float a )
+mat4 rotation_x( float a )
 {
 	float s, c;
 	sincos( a, &s, &c );
@@ -417,7 +417,7 @@ mat4 rotationY( float a )
 	return m;
 }
 
-mat4 rotationZ( float a )
+mat4 rotation_z( float a )
 {
 	float s, c;
 	sincos( a, &s, &c );
@@ -522,7 +522,7 @@ mat4 cubeMapProjectionRH( float znear, float zfar )
 	SLMATH_VEC_ASSERT( zfar > 1e-5f && zfar < 1e6f );
 	SLMATH_VEC_ASSERT( zfar > znear );
 
-	mat4 m = perspectiveFovRH( radians(90.f), 1.f, znear, zfar );
+	mat4 m = perspective_fov_rh( radians(90.f), 1.f, znear, zfar );
 	m[1][1] = -m[1][1];
 	return m;
 }
@@ -654,12 +654,12 @@ static inline mat4 ortho( float w, float h, float znear, float zfar, float sign 
 	return m;
 }
 
-mat4 orthoRH( float w, float h, float znear, float zfar )
+mat4 ortho_rh( float w, float h, float znear, float zfar )
 {
 	return ortho( w, h, znear, zfar, 1.f );
 }
 
-mat4 orthoLH( float w, float h, float znear, float zfar )
+mat4 ortho_lh( float w, float h, float znear, float zfar )
 {
 	return ortho( w, h, znear, zfar, -1.f );
 }
@@ -677,4 +677,4 @@ mat4 outerProduct( const vec4& a, const vec4& b )
 
 SLMATH_END()
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

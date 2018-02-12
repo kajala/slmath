@@ -23,4 +23,4 @@
 
 #endif // SLMATH_NO_SIMD_H
 
-// This file is part of 'slmath' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slmath/
+// This file is part of 'slmath' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slmath/

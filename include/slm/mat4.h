@@ -206,7 +206,7 @@ bool	check( const mat4& v );
  * @param zfar Z-value at far view-plane. Distance to znear must be more than 1e-6.
  * @ingroup mat_util
  */
-mat4	perspectiveFovRH( float fovy, float aspect, float znear, float zfar );
+mat4	perspective_fov_rh( float fovy, float aspect, float znear, float zfar );
 
 /** 
  * Returns left-handed perspective projection transform.
@@ -217,7 +217,7 @@ mat4	perspectiveFovRH( float fovy, float aspect, float znear, float zfar );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	perspectiveFovLH( float fovy, float aspect, float znear, float zfar );
+mat4	perspective_fov_lh( float fovy, float aspect, float znear, float zfar );
 
 /**
  * Returns righ-handed orthographic projection matrix.
@@ -226,7 +226,7 @@ mat4	perspectiveFovLH( float fovy, float aspect, float znear, float zfar );
  * @param znear Minimum Z-value of view volume.
  * @param zfar Maximum Z-value of view volume.
  */
-mat4	orthoRH( float w, float h, float znear, float zfar );
+mat4	ortho_rh( float w, float h, float znear, float zfar );
 
 /**
  * Returns left-handed orthographic projection matrix.
@@ -235,7 +235,7 @@ mat4	orthoRH( float w, float h, float znear, float zfar );
  * @param znear Minimum Z-value of view volume.
  * @param zfar Maximum Z-value of view volume.
  */
-mat4	orthoLH( float w, float h, float znear, float zfar );
+mat4	ortho_lh( float w, float h, float znear, float zfar );
 
 /**
  * Returns translation matrix.
@@ -249,7 +249,7 @@ mat4	translation( const vec3& t );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	rotationX( float a );
+mat4	rotation_x( float a );
 
 /**
  * Returns rotation about Y-axis.
@@ -265,7 +265,7 @@ mat4	rotationY( float a );
  * @return The transform.
  * @ingroup mat_util
  */
-mat4	rotationZ( float a );
+mat4	rotation_z( float a );
 
 /**
  * Returns uniform scaling matrix with last column set to (0,0,0,1).
@@ -359,4 +359,4 @@ SLMATH_END()
 
 #endif
 
-// This file is part of 'slm' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slm/
+// This file is part of 'slm' C++ library. Copyright (C) 2009-2018 Jani Kajala (kajala@gmail.com). Licensed under BSD/MIT license

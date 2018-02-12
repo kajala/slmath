@@ -1,0 +1,2 @@
+g++ tests.cpp ../sources/*.cpp -I ../include
+./a.out

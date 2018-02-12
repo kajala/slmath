@@ -1,10 +1,15 @@
-#include "test_slmath.h"
-#include "testframework.h"
 #include <slm/slmath.h>
 #include <stdio.h>
 #include <string.h>
 
+#define TEST(_B) {char testid[256]; sprintf(testid, "%s(%d): %s", __FILE__, __LINE__, #_B); if (!(_B)) {printf("TEST %s failed\n", testid);}}
+
 SLMATH_USING()
+
+static float random_float()
+{
+    return float(rand() % 1000) / 1000.0f;
+}
 
 static float err( const mat4& a, const mat4& b )
 {
@@ -76,7 +81,7 @@ static bool test_vec3( char* testid )
 static bool test_mat4( char* testid )
 {
 	// set device transformations
-	mat4 proj = perspectiveFovRH( radians(60.f), 640.f/480.f, 0.01f, 10000.f );
+	mat4 proj = perspective_fov_rh( radians(60.f), 640.f/480.f, 0.01f, 10000.f );
 	mat4 view = lookAtRH( vec3(0,0,200), vec3(0,0,0), vec3(0,1,0) );
 	mat4 world(1);
 
@@ -103,51 +108,21 @@ static bool test_mat4( char* testid )
 	v1b = fromToRotation( v0.xyz(), v1.xyz() ) * v0;
 	TEST( distance(v1,v1b) < 1e-5f );
 
-	// determinant
-	random randval( 1234 );
-	mat4 det_m0;
-	for ( size_t i = 0 ; i < 16 ; ++i )
-		det_m0[i/4][i&3] = randomFloat(randval);
-	assert( fabsf(0.021621689f-det(det_m0)) < 1e-12f );
-
 	// inverse
 	const mat4 m = translation( vec3(1.f,2.f,3.f) ) * fromToRotation( normalize(vec3(1.f,2.f,3.f)), normalize(vec3(4.f,1.f,3.f)) );
 	const mat4 im = inverse(m);
 
 	// test: angle-axis
 	mat4 r1( radians(80.f), vec3(1,0,0) );
-	mat4 r1b = rotationX( radians(80.f) );
+	mat4 r1b = rotation_x( radians(80.f) );
 	mat4 r2( radians(80.f), vec3(0,1,0) );
 	mat4 r2b = rotationY( radians(80.f) );
 	mat4 r3( radians(80.f), vec3(0,0,1) );
-	mat4 r3b = rotationZ( radians(80.f) );
+	mat4 r3b = rotation_z( radians(80.f) );
 	TEST( err(r1,r1b) < 1e-3f );
 	TEST( err(r2,r2b) < 1e-3f );
 	TEST( err(r3,r3b) < 1e-3f );
 
-	return true;
-}
-
-static bool test_rand( char* testid )
-{
-	size_t slots[101];
-	memset( slots, 0, sizeof(slots) );
-	random seed = 1;
-	const size_t n = 100000;
-	for ( size_t i = 0 ; i < n ; ++i )
-	{
-		float x = seed.randomFloat();
-		size_t s = size_t(x*100.f);
-		slots[s] += 1;
-	}
-	//printf( "Distribution (n=%d):\n", n );
-	const size_t avg = (n/100);
-	for ( size_t i = 0 ; i < 100 ; ++i )
-	{
-		size_t dist = ::abs( int(slots[i]-avg) );
-		//printf( "[%d] = %d, dist(avg)=%d\n", i, slots[i], dist );
-		TEST( dist < avg/10 );
-	}
 	return true;
 }
 
@@ -169,59 +144,12 @@ static bool test_quat( char* testid )
 	// test quat -> angle-axis
 	vec3 axis[2];
 	float angle[2];
-	toAngleAxis(a,&angle[0],&axis[0]);
-	toAngleAxis(b,&angle[1],&axis[1]);
+	to_angle_axis(a,&angle[0],&axis[0]);
+	to_angle_axis(b,&angle[1],&axis[1]);
 	TEST( fabsf(angle[0]-radians(80.f)) < 1e-3f );
 	TEST( fabsf(angle[1]-radians(80.f)) < 1e-3f );
 	TEST( distance(axis[0],vec3(1,0,0)) < 1e-3f );
 	TEST( distance(axis[1],vec3(0,1,0)) < 1e-3f );
-	return true;
-}
-
-bool test_gaussian( char* testid )
-{
-	const float OK_KERNEL_2D[7*7] = 
-	{
-		0.00000f, 0.00002f, 0.00019f, 0.00039f, 0.00019f, 0.00002f, 0.00000f, 
-		0.00002f, 0.00079f, 0.00656f, 0.01330f, 0.00656f, 0.00079f, 0.00002f, 
-		0.00019f, 0.00656f, 0.05472f, 0.11098f, 0.05472f, 0.00656f, 0.00019f, 
-		0.00039f, 0.01330f, 0.11098f, 0.22508f, 0.11098f, 0.01330f, 0.00039f, 
-		0.00019f, 0.00656f, 0.05472f, 0.11098f, 0.05472f, 0.00656f, 0.00019f, 
-		0.00002f, 0.00079f, 0.00656f, 0.01330f, 0.00656f, 0.00079f, 0.00002f, 
-		0.00000f, 0.00002f, 0.00019f, 0.00039f, 0.00019f, 0.00002f, 0.00000f, 
-	};
-
-	const float OK_KERNEL_1D[7] = {0.00082f, 0.02804f, 0.23393f, 0.47443f, 0.23393f, 0.02804f, 0.00082f, };
-
-	const int r = 3;
-	const int s = (2*r+1);
-	float kernel[s*s];
-	getGaussianBlurKernel2D( s, 0.84089642f, &kernel[0] );
-	for ( size_t i = 0 ; i < size_t(s*s) ; ++i )
-		TEST( fabsf(OK_KERNEL_2D[i]-kernel[i]) < 1e-5f );
-
-	getGaussianBlurKernel1D( s, 0.84089642f, &kernel[0] );
-	for ( size_t i = 0 ; i < size_t(s) ; ++i )
-		TEST( fabsf(OK_KERNEL_1D[i]-kernel[i]) < 1e-5f );
-
-	// generate test kernels
-	/*printf( "\nfloat OK_KERNEL_2D[%d*%d] = {", s, s );
-	for ( int j = 0 ; j < s ; ++j )
-	{
-		for ( int i = 0 ; i < s ; ++i )
-			printf( "%.5ff, ", kernel[j*s+i] );
-		printf( "\n" );
-	}
-	printf( "};\n" );
-
-	getGaussianBlurKernel1D( s, 0.84089642f, &kernel[0], s );
-	printf( "\nfloat OK_KERNEL_1D[%d] = {", s );
-	for ( int j = 0 ; j < s ; ++j )
-	{
-		printf( "%.5ff, ", kernel[j] );
-	}
-	printf( "};\n" );*/
-
 	return true;
 }
 
@@ -230,10 +158,10 @@ bool test_rotations( char* testid )
 	float a = radians(45.f);
 	vec4 v = vec4(10,10,0,0);
 	vec3 r1 = rotateZ( v.xyz(), a );
-	vec3 r2 = (rotationZ(a) * v).xyz();
+	vec3 r2 = (rotation_z(a) * v).xyz();
 	TEST( length(r1-r2) < 1e-5f );
 	r1 = rotateX( v.xyz(), a );
-	r2 = (rotationX(a) * v).xyz();
+	r2 = (rotation_x(a) * v).xyz();
 	TEST( length(r1-r2) < 1e-5f );
 	r1 = rotateY( v.xyz(), a );
 	r2 = (rotationY(a) * v).xyz();
@@ -258,17 +186,15 @@ bool test_vector_sse( char* testid )
 	return true;
 }
 
-bool test_slmath( char* testid )
+int main()
 {
 	TEST( test_vec2(testid) );
 	TEST( test_vec3(testid) );
 	TEST( test_mat4(testid) );
-	TEST( test_rand(testid) );
 	TEST( test_quat(testid) );
-	TEST( test_gaussian(testid) );
 	TEST( test_rotations(testid) );
 	TEST( test_vector_sse(testid) );
-	return true;
-}
 
-// This file is part of 'slmath' C++ library. Copyright (C) 2009 Jani Kajala (kajala@gmail.com). See http://sourceforge.net/projects/slmath/
+    printf("Tests OK\n");
+    return 0;
+}
